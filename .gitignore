@@ -1,0 +1,32 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore Byebug command history file
+.byebug_history
+
+# Ignore bundler gems
+/vendor/bundle
+
+# Ignore gem builds
+*.gem
+
+# Ignore lock file in gem development
+Gemfile.lock
