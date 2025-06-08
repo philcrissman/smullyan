@@ -9,6 +9,7 @@ require_relative "smullyan/birds/cardinal"
 require_relative "smullyan/birds/warbler"
 require_relative "smullyan/birds/mockingbird"
 require_relative "smullyan/birds/why"
+require_relative "smullyan/birds/lark"
 
 module Smullyan
   class Error < StandardError; end
