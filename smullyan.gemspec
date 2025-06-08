@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/ski/version"
+require_relative "lib/smullyan/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "ski"
-  spec.version = Ski::VERSION
+  spec.name = "smullyan"
+  spec.version = Smullyan::VERSION
   spec.authors = ["Phil Crissman"]
   spec.email = ["your-email@example.com"]
 
-  spec.summary = "A Ruby gem for SKI combinator calculus"
-  spec.description = "A Ruby implementation of the SKI combinator calculus system"
-  spec.homepage = "https://github.com/philcrissman/ski"
+  spec.summary = "A Ruby implementation of combinators from Raymond Smullyan's To Mock a Mockingbird"
+  spec.description = "A Ruby gem implementing the combinatory logic birds from Raymond Smullyan's To Mock a Mockingbird"
+  spec.homepage = "https://github.com/philcrissman/smullyan"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
 
