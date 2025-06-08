@@ -23,7 +23,7 @@ Or install it yourself as:
 ```ruby
 require 'smullyan'
 
-# Using the classic SKI combinators
+# Using SKI combinator names
 s = Smullyan::Birds::S
 k = Smullyan::Birds::K  
 i = Smullyan::Birds::I
