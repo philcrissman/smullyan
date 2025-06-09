@@ -3,6 +3,7 @@
 module Smullyan
   # Module for getting configurable combinator implementations
   module ConfigurableBirds
+    # rubocop:disable Naming/MethodName
     class << self
       def B
         if Smullyan.configuration.direct?(:b)
@@ -49,5 +50,6 @@ module Smullyan
       end
       alias Lark L
     end
+    # rubocop:enable Naming/MethodName
   end
 end

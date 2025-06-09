@@ -60,29 +60,6 @@ class WhyTest < Minitest::Test
     assert_equal 5, length.call(%w[a b c d e])
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-  def test_z_combinator_equivalence
-    y = Smullyan::Birds::Y
-    z = Smullyan::Birds::Z
-
-    # Both Y and Z should work the same for our use case
-    sum_to_n_y = y.call(lambda { |f|
-      lambda { |n|
-        n <= 0 ? 0 : n + f.call(n - 1)
-      }
-    })
-
-    sum_to_n_z = z.call(lambda { |f|
-      lambda { |n|
-        n <= 0 ? 0 : n + f.call(n - 1)
-      }
-    })
-
-    assert_equal sum_to_n_y.call(10), sum_to_n_z.call(10)
-    assert_equal 55, sum_to_n_y.call(10)
-  end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-
   def test_why_aliases
     assert_equal Smullyan::Birds::Why, Smullyan::Birds::Y
     assert_equal Smullyan::Birds::Why, Smullyan::Birds::Sage

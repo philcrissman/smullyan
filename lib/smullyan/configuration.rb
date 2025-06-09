@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# The Smullyan module provides implementations of combinators from
+# Raymond Smullyan's "To Mock a Mockingbird" and related works.
 module Smullyan
   # Configuration for selecting combinator implementations
   class Configuration
@@ -16,17 +18,15 @@ module Smullyan
     end
 
     # Configure specific combinators
-    def use_direct(combinator, value = true)
+    def use_direct(combinator, value: true)
       key = combinator.to_s.downcase.to_sym
-      if @use_direct_implementation.key?(key)
-        @use_direct_implementation[key] = value
-      else
-        raise ArgumentError, "Unknown combinator: #{combinator}"
-      end
+      raise ArgumentError, "Unknown combinator: #{combinator}" unless @use_direct_implementation.key?(key)
+
+      @use_direct_implementation[key] = value
     end
 
     # Configure all combinators at once
-    def use_all_direct(value = true)
+    def use_all_direct(value: true)
       @use_direct_implementation.each_key do |key|
         @use_direct_implementation[key] = value
       end

@@ -75,19 +75,21 @@ class StarlingTest < Minitest::Test
     assert_equal 42, step3
   end
 
+  # rubocop:disable Metrics/AbcSize
   def test_average_with_s3
     b = Smullyan::Birds::B
     starling = Smullyan::Birds::Starling
-    s3 = ->(f) { ->(g) { ->(h) { starling.(b.(f).(g)).(h) } } }
+    s3 = ->(f) { ->(g) { ->(h) { starling.call(b.call(f).call(g)).call(h) } } }
 
-    div = ->(num){ ->(denom) { num / denom.to_f }}
-    sum = ->(arr){ arr.sum }
-    length = ->(arr){ arr.length }
-    
+    div = ->(num) { ->(denom) { num / denom.to_f } }
+    sum = lambda(&:sum)
+    length = lambda(&:length)
+
     average = s3.call(div).call(sum).call(length)
 
     # Average of [1, 2, 3] should be (1 + 2 + 3) / 3 = 2.0
     result = average.call([1, 2, 3])
     assert_equal 2.0, result
   end
+  # rubocop:enable Metrics/AbcSize
 end

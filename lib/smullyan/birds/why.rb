@@ -11,13 +11,6 @@ module Smullyan
       )
     }
 
-    # Alternative Z combinator (strict fixed-point) that's more suitable for eager evaluation
-    Z = lambda { |f|
-      ->(x) { f.call(->(v) { x.call(x).call(v) }) }.call(
-        ->(x) { f.call(->(v) { x.call(x).call(v) }) }
-      )
-    }
-
     # Traditional combinator names
     Y = Why              # Y combinator (fixed-point)
     Sage = Why           # Y combinator (alternative name)
