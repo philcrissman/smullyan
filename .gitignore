@@ -30,3 +30,8 @@
 
 # Ignore lock file in gem development
 Gemfile.lock
+
+# Ignore vim files:
+*~
+*.swp
+*.swo
