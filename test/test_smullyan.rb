@@ -1,28 +1,11 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require 'test_helper'
 
 class SmullyanTest < Minitest::Test
   def test_that_it_has_a_version_number
     refute_nil ::Smullyan::VERSION
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   def test_all_birds_still_available
     # Test that all birds are still accessible after modularization
@@ -41,14 +24,14 @@ class SmullyanTest < Minitest::Test
     kestrel = Smullyan::Birds::Kestrel
     mockingbird = Smullyan::Birds::Mockingbird
     bluebird = Smullyan::Birds::Bluebird
-    
+
     # Kestrel returns first argument
     assert_equal 42, kestrel.call(42).call(99)
-    
+
     # Mockingbird applies function to itself
-    const_func = ->(x) { 99 }
+    const_func = ->(_x) { 99 }
     assert_equal 99, mockingbird.call(const_func)
-    
+
     # Bluebird composes functions
     inc = ->(x) { x + 1 }
     double = ->(x) { x * 2 }

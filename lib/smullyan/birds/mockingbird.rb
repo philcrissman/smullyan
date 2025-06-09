@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
-require_relative "starling"
-require_relative "identity"
+require_relative 'starling'
+require_relative 'identity'
 
 module Smullyan
   module Birds
     # The Mockingbird - self-application
     # Mockingbird x = x x
-    # Can be derived as: M = S I I
-    Mockingbird = S.call(I).call(I)
+    
+    # Derived implementation: M = S I I
+    M_derived = S.call(I).call(I)
     
     # Direct implementation for comparison/efficiency
-    Mockingbird_direct = ->(x) { x.call(x) }
+    M_direct = ->(x) { x.call(x) }
     
-    # Traditional combinator name
-    M = Mockingbird         # M combinator
-    M_direct = Mockingbird_direct
+    # Default to derived implementation for backward compatibility
+    Mockingbird = M_derived
+    M = Mockingbird
   end
 end
