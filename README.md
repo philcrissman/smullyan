@@ -34,22 +34,22 @@ starling = Smullyan::Birds::Starling    # S combinator
 mockingbird = Smullyan::Birds::Mockingbird # M combinator
 
 # Example: Identity function derived from S and K
-identity = s.call(k).call(k)
-identity.call(42) # => 42
+identity = s.(k).(k)
+identity.(42) # => 42
 
 # Example: Function composition with the Bluebird
 bluebird = Smullyan::Birds::Bluebird
 double = ->(x) { x * 2 }
 increment = ->(x) { x + 1 }
-double_after_increment = bluebird.call(double).call(increment)
-double_after_increment.call(5) # => 12
+double_after_increment = bluebird.(double).(increment)
+double_after_increment.(5) # => 12
 
 # Example: Y combinator for recursion
 why = Smullyan::Birds::Why
-factorial = why.call(->(f) {
-  ->(n) { n <= 1 ? 1 : n * f.call(n - 1) }
+factorial = why.(->(f) {
+  ->(n) { n <= 1 ? 1 : n * f.(n - 1) }
 })
-factorial.call(5) # => 120
+factorial.(5) # => 120
 ```
 ## Contributing
 
