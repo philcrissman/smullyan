@@ -4,7 +4,6 @@ module Smullyan
   module Birds
     # The Why bird (Y combinator) - fixed-point combinator
     # Why f = f (Why f)
-    # Here's a practical implementation that works in applicative-order languages like Ruby
     Why = lambda { |f|
       ->(x) { f.call(->(v) { x.call(x).call(v) }) }.call(
         ->(x) { f.call(->(v) { x.call(x).call(v) }) }

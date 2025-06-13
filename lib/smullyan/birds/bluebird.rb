@@ -14,7 +14,7 @@ module Smullyan
     # Direct implementation for comparison/efficiency
     B_direct = ->(x) { ->(y) { ->(z) { x.call(y.call(z)) } } }
 
-    # Default to derived implementation for backward compatibility
+    # Default to derived implementation
     Bluebird = B_derived
     B = Bluebird
   end

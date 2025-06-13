@@ -14,7 +14,7 @@ module Smullyan
     # Direct implementation for comparison/efficiency
     M_direct = ->(x) { x.call(x) }
 
-    # Default to derived implementation for backward compatibility
+    # Default to derived implementation
     Mockingbird = M_derived
     M = Mockingbird
   end

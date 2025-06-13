@@ -15,7 +15,7 @@ module Smullyan
     # Direct implementation for comparison/efficiency
     C_direct = ->(x) { ->(y) { ->(z) { x.call(z).call(y) } } }
 
-    # Default to derived implementation for backward compatibility
+    # Default to derived implementation
     Cardinal = C_derived
     C = Cardinal
   end

@@ -15,7 +15,7 @@ module Smullyan
     # Direct implementation for comparison/efficiency
     W_direct = ->(x) { ->(y) { x.call(y).call(y) } }
 
-    # Default to derived implementation for backward compatibility
+    # Default to derived implementation
     Warbler = W_derived
     W = Warbler
   end
