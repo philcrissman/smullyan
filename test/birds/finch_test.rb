@@ -8,7 +8,7 @@ class FinchTest < Minitest::Test
     
         # Finch f g x = x g f
         subtract = ->(x) { ->(y) { x - y } }
-        assert_equal -5, subtract.call(5).call(10)
+        assert_equal (-5), subtract.call(5).call(10)
         result = finch.call(5).call(10).call(subtract)
         assert_equal 5, result
 

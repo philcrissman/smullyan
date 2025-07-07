@@ -12,6 +12,7 @@ require_relative 'smullyan/birds/mockingbird'
 require_relative 'smullyan/birds/why'
 require_relative 'smullyan/birds/lark'
 require_relative 'smullyan/birds/finch'
+require_relative 'smullyan/birds/robin'
 require_relative 'smullyan/configurable_birds'
 
 module Smullyan
