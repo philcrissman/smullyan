@@ -8,12 +8,12 @@ class FinchTest < Minitest::Test
     
         # Finch f g x = x g f
         subtract = ->(x) { ->(y) { x - y } }
-        assert_equal (-5), subtract.call(5).call(10)
-        result = finch.call(5).call(10).call(subtract)
+        assert_equal (-5), subtract.(5).(10)
+        result = finch.(5).(10).(subtract)
         assert_equal 5, result
 
         less_than = ->(a) { ->(b) { a < b } }
         assert less_than.(3).(5)
-        refute finch.call(3).call(5).call(less_than)
+        refute finch.(3).(5).(less_than)
     end
 end

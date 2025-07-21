@@ -8,18 +8,18 @@ class WhyTest < Minitest::Test
     y = Smullyan::Birds::Y
 
     # Define factorial using Y combinator
-    factorial = y.call(lambda { |f|
+    factorial = y.(lambda { |f|
       lambda { |n|
-        n <= 1 ? 1 : n * f.call(n - 1)
+        n <= 1 ? 1 : n * f.(n - 1)
       }
     })
 
-    assert_equal 1, factorial.call(0)
-    assert_equal 1, factorial.call(1)
-    assert_equal 2, factorial.call(2)
-    assert_equal 6, factorial.call(3)
-    assert_equal 24, factorial.call(4)
-    assert_equal 120, factorial.call(5)
+    assert_equal 1, factorial.(0)
+    assert_equal 1, factorial.(1)
+    assert_equal 2, factorial.(2)
+    assert_equal 6, factorial.(3)
+    assert_equal 24, factorial.(4)
+    assert_equal 120, factorial.(5)
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
@@ -28,19 +28,19 @@ class WhyTest < Minitest::Test
     y = Smullyan::Birds::Y
 
     # Define fibonacci using Y combinator
-    fibonacci = y.call(lambda { |f|
+    fibonacci = y.(lambda { |f|
       lambda { |n|
-        n <= 1 ? n : f.call(n - 1) + f.call(n - 2)
+        n <= 1 ? n : f.(n - 1) + f.(n - 2)
       }
     })
 
-    assert_equal 0, fibonacci.call(0)
-    assert_equal 1, fibonacci.call(1)
-    assert_equal 1, fibonacci.call(2)
-    assert_equal 2, fibonacci.call(3)
-    assert_equal 3, fibonacci.call(4)
-    assert_equal 5, fibonacci.call(5)
-    assert_equal 8, fibonacci.call(6)
+    assert_equal 0, fibonacci.(0)
+    assert_equal 1, fibonacci.(1)
+    assert_equal 1, fibonacci.(2)
+    assert_equal 2, fibonacci.(3)
+    assert_equal 3, fibonacci.(4)
+    assert_equal 5, fibonacci.(5)
+    assert_equal 8, fibonacci.(6)
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
@@ -48,16 +48,16 @@ class WhyTest < Minitest::Test
     y = Smullyan::Birds::Y
 
     # Define length function for arrays using Y combinator
-    length = y.call(lambda { |f|
+    length = y.(lambda { |f|
       lambda { |arr|
-        arr.empty? ? 0 : 1 + f.call(arr[1..])
+        arr.empty? ? 0 : 1 + f.(arr[1..])
       }
     })
 
-    assert_equal 0, length.call([])
-    assert_equal 1, length.call([1])
-    assert_equal 3, length.call([1, 2, 3])
-    assert_equal 5, length.call(%w[a b c d e])
+    assert_equal 0, length.([])
+    assert_equal 1, length.([1])
+    assert_equal 3, length.([1, 2, 3])
+    assert_equal 5, length.(%w[a b c d e])
   end
 
   def test_why_aliases

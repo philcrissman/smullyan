@@ -26,15 +26,15 @@ class SmullyanTest < Minitest::Test
     bluebird = Smullyan::Birds::Bluebird
 
     # Kestrel returns first argument
-    assert_equal 42, kestrel.call(42).call(99)
+    assert_equal 42, kestrel.(42).(99)
 
     # Mockingbird applies function to itself
     const_func = ->(_x) { 99 }
-    assert_equal 99, mockingbird.call(const_func)
+    assert_equal 99, mockingbird.(const_func)
 
     # Bluebird composes functions
     inc = ->(x) { x + 1 }
     double = ->(x) { x * 2 }
-    assert_equal 12, bluebird.call(double).call(inc).call(5)
+    assert_equal 12, bluebird.(double).(inc).(5)
   end
 end

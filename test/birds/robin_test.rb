@@ -8,7 +8,7 @@ class RobinTest < Minitest::Test
 
     subtract = ->(x) { ->(y) { x - y } }
     
-    assert_equal 2, robin.call(3).call(subtract).call(5)
+    assert_equal 2, robin.(3).(subtract).(5)
   end
 
   def test_robin_can_compose_cardinal

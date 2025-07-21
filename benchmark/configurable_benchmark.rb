@@ -20,14 +20,14 @@ Benchmark.ips do |x|
   Smullyan.configuration.use_direct(:b, value: false)
 
   x.report('B (config: derived)') do
-    Smullyan::ConfigurableBirds.B.call(double).call(add_one).call(5)
+    Smullyan::ConfigurableBirds.B.(double).(add_one).(5)
   end
 
   # Switch to direct
   Smullyan.configuration.use_direct(:b, value: true)
 
   x.report('B (config: direct)') do
-    Smullyan::ConfigurableBirds.B.call(double).call(add_one).call(5)
+    Smullyan::ConfigurableBirds.B.(double).(add_one).(5)
   end
 
   x.compare!
@@ -42,25 +42,25 @@ end
 
 Benchmark.ips do |x|
   x.report('B direct') do
-    Smullyan::ConfigurableBirds.B.call(double).call(add_one).call(5)
+    Smullyan::ConfigurableBirds.B.(double).(add_one).(5)
   end
 
   x.report('C direct') do
     subtract = ->(x) { ->(y) { x - y } }
-    Smullyan::ConfigurableBirds.C.call(subtract).call(10).call(3)
+    Smullyan::ConfigurableBirds.C.(subtract).(10).(3)
   end
 
   x.report('W direct') do
     pair = ->(x) { ->(y) { [x, y] } }
-    Smullyan::ConfigurableBirds.W.call(pair).call(21)
+    Smullyan::ConfigurableBirds.W.(pair).(21)
   end
 
   x.report('M direct') do
-    Smullyan::ConfigurableBirds.M.call(const_forty_two)
+    Smullyan::ConfigurableBirds.M.(const_forty_two)
   end
 
   x.report('L direct') do
-    Smullyan::ConfigurableBirds.L.call(identity).call(const_forty_two)
+    Smullyan::ConfigurableBirds.L.(identity).(const_forty_two)
   end
 end
 puts
@@ -71,11 +71,11 @@ Smullyan.configuration.use_direct(:b, false)
 
 Benchmark.ips do |x|
   x.report('B via ConfigurableBirds') do
-    Smullyan::ConfigurableBirds.B.call(double).call(add_one).call(5)
+    Smullyan::ConfigurableBirds.B.(double).(add_one).(5)
   end
 
   x.report('B direct constant') do
-    Smullyan::Birds::B.call(double).call(add_one).call(5)
+    Smullyan::Birds::B.(double).(add_one).(5)
   end
 
   x.compare!

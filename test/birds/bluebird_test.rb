@@ -11,8 +11,8 @@ class BluebirdTest < Minitest::Test
     increment = ->(x) { x + 1 }
 
     # B double increment 5 = double (increment 5) = double 6 = 12
-    composed = bluebird.call(double).call(increment)
-    assert_equal 12, composed.call(5)
+    composed = bluebird.(double).(increment)
+    assert_equal 12, composed.(5)
   end
 
   def test_b_combinator_alias
@@ -22,8 +22,8 @@ class BluebirdTest < Minitest::Test
     negate = lambda(&:-@)
 
     # B square negate 3 = square (negate 3) = square (-3) = 9
-    composed = b.call(square).call(negate)
-    assert_equal 9, composed.call(3)
+    composed = b.(square).(negate)
+    assert_equal 9, composed.(3)
   end
 
   def test_bluebird_alias_equals_b
@@ -38,8 +38,8 @@ class BluebirdTest < Minitest::Test
     square = ->(x) { x * x }
     negate = lambda(&:-@)
 
-    assert_equal b.call(square).call(negate).call(3),
-                 b_direct.call(square).call(negate).call(3)
+    assert_equal b.(square).(negate).(3),
+                 b_direct.(square).(negate).(3)
   end
 
   def test_bluebird_with_strings
@@ -49,8 +49,8 @@ class BluebirdTest < Minitest::Test
     reverse = lambda(&:reverse)
 
     # B upcase reverse "hello" = upcase (reverse "hello") = upcase "olleh" = "OLLEH"
-    composed = b.call(upcase).call(reverse)
-    assert_equal 'OLLEH', composed.call('hello')
+    composed = b.(upcase).(reverse)
+    assert_equal 'OLLEH', composed.('hello')
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -63,12 +63,12 @@ class BluebirdTest < Minitest::Test
 
     # Compose three functions: square ∘ double ∘ add_one
     # (3 + 1) * 2 = 8, then 8² = 64
-    composed1 = b.call(square).call(b.call(double).call(add_one))
-    assert_equal 64, composed1.call(3)
+    composed1 = b.(square).(b.(double).(add_one))
+    assert_equal 64, composed1.(3)
 
     # Same result with different grouping
-    composed2 = b.call(b.call(square).call(double)).call(add_one)
-    assert_equal 64, composed2.call(3)
+    composed2 = b.(b.(square).(double)).(add_one)
+    assert_equal 64, composed2.(3)
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -81,22 +81,22 @@ class BluebirdTest < Minitest::Test
     reverse = lambda(&:reverse)
 
     # Pipeline: trim -> downcase -> reverse
-    pipeline = b.call(reverse).call(b.call(downcase).call(trim))
+    pipeline = b.(reverse).(b.(downcase).(trim))
 
-    assert_equal 'olleh', pipeline.call('  HELLO  ')
+    assert_equal 'olleh', pipeline.('  HELLO  ')
   end
 
   def test_bluebird_is_curried
     bluebird = Smullyan::Birds::Bluebird
 
     # Can be called step by step
-    step1 = bluebird.call(->(x) { x * 2 })
+    step1 = bluebird.(->(x) { x * 2 })
     assert_instance_of Proc, step1
 
-    step2 = step1.call(->(x) { x + 1 })
+    step2 = step1.(->(x) { x + 1 })
     assert_instance_of Proc, step2
 
-    step3 = step2.call(5)
+    step3 = step2.(5)
     assert_equal 12, step3
   end
 end

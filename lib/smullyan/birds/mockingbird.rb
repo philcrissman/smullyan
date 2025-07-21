@@ -9,10 +9,10 @@ module Smullyan
     # Mockingbird x = x x
 
     # Derived implementation: M = S I I
-    M_derived = S.call(I).call(I)
+    M_derived = S.(I).(I)
 
     # Direct implementation for comparison/efficiency
-    M_direct = ->(x) { x.call(x) }
+    M_direct = ->(x) { x.(x) }
 
     # Default to derived implementation
     Mockingbird = M_derived

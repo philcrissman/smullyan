@@ -10,10 +10,10 @@ module Smullyan
     # Cardinal x y z = x z y
 
     # Derived implementation: C = S (B B S) (K K)
-    C_derived = S.call(B.call(B).call(S)).call(K.call(K))
+    C_derived = S.(B.(B).(S)).(K.(K))
 
     # Direct implementation for comparison/efficiency
-    C_direct = ->(x) { ->(y) { ->(z) { x.call(z).call(y) } } }
+    C_direct = ->(x) { ->(y) { ->(z) { x.(z).(y) } } }
 
     # Default to derived implementation
     Cardinal = C_derived

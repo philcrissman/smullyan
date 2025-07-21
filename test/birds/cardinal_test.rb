@@ -10,11 +10,11 @@ class CardinalTest < Minitest::Test
     subtract = ->(x) { ->(y) { x - y } }
 
     # C subtract 5 3 = subtract 3 5 = 3 - 5 = -2
-    flipped = cardinal.call(subtract)
-    assert_equal(-2, flipped.call(5).call(3))
+    flipped = cardinal.(subtract)
+    assert_equal(-2, flipped.(5).(3))
 
     # Without C: subtract 5 3 = 5 - 3 = 2
-    assert_equal 2, subtract.call(5).call(3)
+    assert_equal 2, subtract.(5).(3)
   end
 
   def test_c_combinator_alias
@@ -22,7 +22,7 @@ class CardinalTest < Minitest::Test
 
     divide = ->(x) { ->(y) { x.to_f / y } }
     # C divide 10 2 = divide 2 10 = 2.0 / 10 = 0.2
-    assert_equal 0.2, c.call(divide).call(10).call(2)
+    assert_equal 0.2, c.(divide).(10).(2)
   end
 
   def test_cardinal_alias_equals_c
@@ -36,8 +36,8 @@ class CardinalTest < Minitest::Test
     # Test that derived C behaves same as direct implementation
     divide = ->(x) { ->(y) { x.to_f / y } }
 
-    assert_equal c.call(divide).call(10).call(2),
-                 c_direct.call(divide).call(10).call(2)
+    assert_equal c.(divide).(10).(2),
+                 c_direct.(divide).(10).(2)
   end
 
   def test_cardinal_with_strings
@@ -46,8 +46,8 @@ class CardinalTest < Minitest::Test
     concat = ->(x) { ->(y) { x + y } }
 
     # C concat "world" "hello" = concat "hello" "world" = "helloworld"
-    flipped_concat = c.call(concat)
-    assert_equal 'helloworld', flipped_concat.call('world').call('hello')
+    flipped_concat = c.(concat)
+    assert_equal 'helloworld', flipped_concat.('world').('hello')
   end
 
   def test_cardinal_practical_use
@@ -55,22 +55,22 @@ class CardinalTest < Minitest::Test
     k = Smullyan::Birds::K
 
     # C K x y = K y x = y (demonstrates how C can be used to select second argument)
-    second = c.call(k)
-    assert_equal 'second', second.call('first').call('second')
-    assert_equal 42, second.call(99).call(42)
+    second = c.(k)
+    assert_equal 'second', second.('first').('second')
+    assert_equal 42, second.(99).(42)
   end
 
   def test_cardinal_is_curried
     cardinal = Smullyan::Birds::Cardinal
 
     # Can be called step by step
-    step1 = cardinal.call(->(x) { ->(y) { x - y } })
+    step1 = cardinal.(->(x) { ->(y) { x - y } })
     assert_instance_of Proc, step1
 
-    step2 = step1.call(10)
+    step2 = step1.(10)
     assert_instance_of Proc, step2
 
-    step3 = step2.call(3)
+    step3 = step2.(3)
     assert_equal(-7, step3) # 3 - 10 = -7
   end
 end

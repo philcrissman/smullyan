@@ -14,7 +14,7 @@ class MockingbirdTest < Minitest::Test
       42
     }
 
-    result = m.call(counting_function)
+    result = m.(counting_function)
     assert_equal 42, result
     assert_equal 1, counter # Function was applied to itself once
   end
@@ -27,7 +27,7 @@ class MockingbirdTest < Minitest::Test
     # Use a function that can be applied to itself
     const_forty_two = ->(_x) { 42 }
 
-    assert_equal m.call(const_forty_two), m_direct.call(const_forty_two)
+    assert_equal m.(const_forty_two), m_direct.(const_forty_two)
   end
 
   def test_mockingbird_with_w
@@ -36,11 +36,11 @@ class MockingbirdTest < Minitest::Test
 
     # M W = W W = W W x = W x x = x x x
     # This creates a function that applies its argument to itself
-    mw = m.call(w)
+    mw = m.(w)
 
     # Test with identity function
     i = Smullyan::Birds::I
-    assert_equal i, mw.call(i) # I I = I
+    assert_equal i, mw.(i) # I I = I
   end
 
   def test_mockingbird_omega
@@ -49,7 +49,7 @@ class MockingbirdTest < Minitest::Test
     m = Smullyan::Birds::M
 
     # Just verify we can create the expression (but don't call it!)
-    omega = -> { m.call(m) }
+    omega = -> { m.(m) }
     assert_instance_of Proc, omega
   end
 end

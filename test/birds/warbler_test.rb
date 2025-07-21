@@ -10,9 +10,9 @@ class WarblerTest < Minitest::Test
     multiply = ->(x) { ->(y) { x * y } }
 
     # W multiply 5 = multiply 5 5 = 25
-    square = w.call(multiply)
-    assert_equal 25, square.call(5)
-    assert_equal 9, square.call(3)
+    square = w.(multiply)
+    assert_equal 25, square.(5)
+    assert_equal 9, square.(3)
   end
 
   def test_warbler_derived_equals_direct
@@ -22,8 +22,8 @@ class WarblerTest < Minitest::Test
     # Test that derived W behaves same as direct implementation
     add = ->(x) { ->(y) { x + y } }
 
-    assert_equal w.call(add).call(7),
-                 w_direct.call(add).call(7)
+    assert_equal w.(add).(7),
+                 w_direct.(add).(7)
   end
 
   def test_warbler_with_strings
@@ -32,9 +32,9 @@ class WarblerTest < Minitest::Test
     concat = ->(x) { ->(y) { x + y } }
 
     # W concat "hi" = concat "hi" "hi" = "hihi"
-    double_string = w.call(concat)
-    assert_equal 'hihi', double_string.call('hi')
-    assert_equal 'testtest', double_string.call('test')
+    double_string = w.(concat)
+    assert_equal 'hihi', double_string.('hi')
+    assert_equal 'testtest', double_string.('test')
   end
 
   def test_warbler_practical_use
@@ -42,8 +42,8 @@ class WarblerTest < Minitest::Test
     k = Smullyan::Birds::K
 
     # W K x = K x x = x (another way to derive identity)
-    identity_via_w = w.call(k)
-    assert_equal 42, identity_via_w.call(42)
-    assert_equal 'hello', identity_via_w.call('hello')
+    identity_via_w = w.(k)
+    assert_equal 42, identity_via_w.(42)
+    assert_equal 'hello', identity_via_w.('hello')
   end
 end

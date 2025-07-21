@@ -10,10 +10,10 @@ module Smullyan
     # Lark x y = x (y y)
 
     # Derived implementation: L = C B M
-    L_derived = C.call(B).call(M)
+    L_derived = C.(B).(M)
 
     # Direct implementation for comparison/efficiency
-    L_direct = ->(x) { ->(y) { x.call(y.call(y)) } }
+    L_direct = ->(x) { ->(y) { x.(y.(y)) } }
 
     # Default to derived implementation
     Lark = L_derived

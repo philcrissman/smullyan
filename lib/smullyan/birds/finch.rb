@@ -4,7 +4,7 @@ module Smullyan
         # The finch applies its third argument 
         # to the first and second arguments in reverse order.
         # Finch x y z = z y x
-        Finch = ->(x) { ->(y) { ->(z) { z.call(y).call(x) } } }
+        Finch = ->(x) { ->(y) { ->(z) { z.(y).(x) } } }
 
         # Traditional combinator name
         F = Finch # F combinator

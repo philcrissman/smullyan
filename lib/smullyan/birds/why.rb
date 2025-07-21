@@ -5,8 +5,8 @@ module Smullyan
     # The Why bird (Y combinator) - fixed-point combinator
     # Why f = f (Why f)
     Why = lambda { |f|
-      ->(x) { f.call(->(v) { x.call(x).call(v) }) }.call(
-        ->(x) { f.call(->(v) { x.call(x).call(v) }) }
+      ->(x) { f.(->(v) { x.(x).(v) }) }.(
+        ->(x) { f.(->(v) { x.(x).(v) }) }
       )
     }
 

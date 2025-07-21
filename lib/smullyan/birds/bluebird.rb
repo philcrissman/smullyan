@@ -9,10 +9,10 @@ module Smullyan
     # Bluebird x y z = x (y z)
 
     # Derived implementation: B = S (K S) K
-    B_derived = S.call(K.call(S)).call(K)
+    B_derived = S.(K.(S)).(K)
 
     # Direct implementation for comparison/efficiency
-    B_direct = ->(x) { ->(y) { ->(z) { x.call(y.call(z)) } } }
+    B_direct = ->(x) { ->(y) { ->(z) { x.(y.(z)) } } }
 
     # Default to derived implementation
     Bluebird = B_derived

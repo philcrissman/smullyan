@@ -12,7 +12,7 @@ class LarkTest < Minitest::Test
     identity = ->(x) { x }
 
     # L const_forty_two identity = const_forty_two (identity identity) = const_forty_two identity = 42
-    result = lark.call(const_forty_two).call(identity)
+    result = lark.(const_forty_two).(identity)
     assert_equal 42, result
   end
 
@@ -28,7 +28,7 @@ class LarkTest < Minitest::Test
     first = ->(x) { x }
 
     # L first counting_fn = first (counting_fn counting_fn)
-    result = l.call(first).call(counting_fn)
+    result = l.(first).(counting_fn)
     assert_equal counting_fn, result
     assert_equal 1, counter # counting_fn was called once (self-applied)
   end
@@ -45,8 +45,8 @@ class LarkTest < Minitest::Test
     double = ->(x) { x * 2 }
     const_five = ->(_x) { 5 }
 
-    assert_equal l.call(double).call(const_five),
-                 l_direct.call(double).call(const_five)
+    assert_equal l.(double).(const_five),
+                 l_direct.(double).(const_five)
   end
 
   def test_lark_with_arithmetic
@@ -57,7 +57,7 @@ class LarkTest < Minitest::Test
     identity = ->(x) { x }
 
     # L identity const_forty_two = identity (const_forty_two const_forty_two) = identity 42 = 42
-    result = l.call(identity).call(const_forty_two)
+    result = l.(identity).(const_forty_two)
     assert_equal 42, result
   end
 
@@ -67,20 +67,20 @@ class LarkTest < Minitest::Test
 
     # L I creates a function that self-applies its argument
     # L I x = I (x x) = x x
-    self_apply = l.call(i)
+    self_apply = l.(i)
 
     # Test with identity - should return identity
-    assert_equal i, self_apply.call(i)
+    assert_equal i, self_apply.(i)
   end
 
   def test_lark_is_curried
     lark = Smullyan::Birds::Lark
 
     # Can be called step by step
-    step1 = lark.call(->(x) { x })
+    step1 = lark.(->(x) { x })
     assert_instance_of Proc, step1
 
-    step2 = step1.call(->(_x) { 42 })
+    step2 = step1.(->(_x) { 42 })
     assert_equal 42, step2
   end
 
@@ -92,7 +92,7 @@ class LarkTest < Minitest::Test
     supplier = ->(_x) { 99 } # Always returns 99
 
     # L extractor supplier = extractor (supplier supplier) = extractor 99 = 99
-    result = l.call(extractor).call(supplier)
+    result = l.(extractor).(supplier)
     assert_equal 99, result
   end
 end

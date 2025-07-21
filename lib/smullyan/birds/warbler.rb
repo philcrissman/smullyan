@@ -10,10 +10,10 @@ module Smullyan
     # Warbler x y = x y y
 
     # Derived implementation: W = C S I
-    W_derived = C.call(S).call(I)
+    W_derived = C.(S).(I)
 
     # Direct implementation for comparison/efficiency
-    W_direct = ->(x) { ->(y) { x.call(y).call(y) } }
+    W_direct = ->(x) { ->(y) { x.(y).(y) } }
 
     # Default to derived implementation
     Warbler = W_derived
