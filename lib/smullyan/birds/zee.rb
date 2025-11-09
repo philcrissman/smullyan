@@ -20,18 +20,25 @@ module Smullyan
       )
     }
 
-    # Theoretical derivations that work in lazy evaluation:
-    # Z = S(KU)(SB(KQ))  - using S, K, B, Q, U combinators
-    # Z = BU(CBQ)        - alternative formula using B, C, Q, U
+    # Theoretical derivations from literature:
+    # Wikipedia and other sources cite: Z = S(KU)(SB(KQ)) or Z = BU(CBQ)
     #
-    # However, these don't work in Ruby's strict evaluation without explicit delays.
-    # The derived formulas will cause infinite recursion in strict languages.
-    # We include them here for reference but commented out:
+    # INVESTIGATION RESULT: These formulas DO NOT WORK in Ruby when Q is the Queer bird.
     #
-    # Z_from_SKI = S.(K.(U)).(S.(B).(K.(Q)))
-    # Z_from_BCU = B.(U).(C.(B).(Q))
+    # Through lambda calculus reduction (see ../../../Z_COMBINATOR_FINDINGS.md), we proved:
+    #   Z = BU(CBQ) reduces to: Z f y = y (f (λz. y (f (Q z))))
+    #
+    # This tries to call y as a function, but when using Z for recursion (e.g., factorial),
+    # y is a NUMBER, not a function. This causes: TypeError: Proc can't be coerced into Integer
+    #
+    # Conclusion: Either the formula uses a different combinator also named "Q",
+    # or the formula only works in lazy evaluation despite Z being for strict evaluation.
+    #
+    # We include attempted implementations here for reference:
+    # Z_from_SKI = S.(K.(U)).(S.(B).(K.(Q)))  # DOES NOT WORK
+    # Z_from_BCU = B.(U).(C.(B).(Q))          # DOES NOT WORK
 
-    # Default to direct implementation (required for strict evaluation)
+    # Default to direct implementation (the only one that works)
     Z = Z_direct
 
     # Alternative names
